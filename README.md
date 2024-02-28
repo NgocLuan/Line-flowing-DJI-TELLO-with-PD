@@ -1,12 +1,8 @@
-# Control DJI Tello using Raspberry Pi Zero and Xbox One S Controller
+# UAV line-following using image processing
 
-I recently bought DJI Tello and was amazed on how much you can learn and do with this little drone since it offers the ability to program. To start my learning, I decided to take inspiration from one of my pet projects on [controlling a RaspberryPi rover with Xbox One S Bluetooth Controller](https://github.com/erviveksoni/xbox-raspberrypi-rover) and extended it to control the Tello using a easy to use python library [TelloPy](https://github.com/hanyazou/TelloPy).
+focuses on researching and developing a UAV system capable of autonomously controlling and maintaining flight along a pre-defined path (line), while utilizing image processing techniques to detect and analyze data of the line path. The project emphasizes analyzing, designing, and implementing image processing algorithms and suitable PD controllers to achieve this goal. Specific tasks include line detection for the drone to follow, collecting necessary data for autonomous line-following, and constructing PD controllers integrated with the image processing system. The expected outcome of the project is a flexible and efficient UAV system capable of accurately and stably flying along a predetermined line path
 
-While working on this application, I thought it would be a really cool idea to mount the Raspberry Pi Zero on top of the Tello itself rather then using the zero as a base station and keeping it on the ground. 
-
-Offcourse this adds additional weight to the drone (and reduce flying time) but for the application I am looking it was OK! Also, this gives me freedom of not carrying my laptop whenever I want to fly it using Xbox One S controller. Additionally this lays foundation for a few project ideas I have.
-
-Here is a [short video](https://www.youtube.com/watch?v=rT4CF4Krcc8) of the drone in action:
+Here is a [short video](https://www.youtube.com/watch?v=CcdG9qiCEZA) of the drone in action:
 
 <img src="/images/drone_front.jpeg" alt="Tello with Raspberry Pi Zero" width="600" height="274" border="10" />
 
