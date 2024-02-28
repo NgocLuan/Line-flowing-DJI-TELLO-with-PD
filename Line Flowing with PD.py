@@ -1,73 +1,97 @@
 import numpy as np
-
 from djitellopy import tello
-
 import cv2
+import pandas as pd
 
-
+# connect to tello drone
 me = tello.Tello()
-
 me.connect()
-
 print(me.get_battery())
-
 me.streamon()
-
-#me.takeoff()
-
+me.takeoff()
+# opencv2
 cap = cv2.VideoCapture(1)
-
-hsvVals = [47,14,0,179,193,99]
-
+# image processing data
+hsvVals = [0, 17, 0, 29, 255, 130]
+threshold = 0.2
+width, height = 480, 360
+fSpeed = 10
+curve = 0
 sensors = 3
 
-threshold = 0.2
+class PDController:
+    def __init__(self, kp, kd, setpoint):
+        self.kp = kp
+        self.kd = kd
+        self.setpoint = setpoint
+        self.prev_error = 0
 
-width, height = 480, 360
+    def update(self, current_value):
+        error = self.setpoint - current_value
+        derivative = error - self.prev_error
+        output = self.kp * error + self.kd * derivative
+        self.prev_error = error
+        return output
 
-senstivity = 3  # if number is high less sensitive
+class PDControllerangle:
+    def __init__(self, kp_a, kd_a, setpoint_a):
+        self.kp_a = kp_a
+        self.kd_a = kd_a
+        self.setpoint_a = setpoint_a
+        self.prev_error_a = 0
 
-weights = [-25, -15, 0, 15, 25]
-
-fSpeed = 5
-
-curve = 0
-
-
+    def update(self, current_value_a):
+        error_a = self.setpoint_a - current_value_a
+        derivative_a = error_a - self.prev_error_a
+        output_a = self.kp_a * error_a + self.kd_a * derivative_a
+        self.prev_error_a = error_a
+        return output_a
 
 def thresholding(img):
-
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
     lower = np.array([hsvVals[0], hsvVals[1], hsvVals[2]])
-
     upper = np.array([hsvVals[3], hsvVals[4], hsvVals[5]])
-
     mask = cv2.inRange(hsv, lower, upper)
-
     return mask
 
 def getContours(imgThres, img):
     cx = 0
-    
+    cy = 0
+    angle = 0
+
     contours, hierarchy = cv2.findContours(imgThres, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     if len(contours) != 0:
         biggest = max(contours, key=cv2.contourArea)
+        rect = cv2.minAreaRect(biggest)
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+
+        # Vẽ hình chữ nhật bao quanh đối tượng
+        cv2.drawContours(img, [box], 0, (0, 0, 255), 2)
+
+        # Tính góc nghiêng của hình chữ nhật
+        angle = rect[2]
+
         x, y, w, h = cv2.boundingRect(biggest)
         cx = x + w // 2
         cy = y + h // 2
-        cv2.drawContours(img, [biggest], -1, (0, 0, 0), 7)
+        
+        if angle < 45:
+            angle = angle
+        if angle > 45:
+            angle = 90 - angle
+        
+        # Draw a line from the center to the top center of the largest contour
+        # cv2.line(img, (width // 2, height // 2), (cx, y), (0, 255, 255), 2)
+        
+        # Display cx, cy, and adjusted angle values
+        text = f"cx: {cx},angle: {angle:.2f} degrees"
+        cv2.putText(img, text, (cx - 40, cy + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
+
         cv2.circle(img, (cx, cy), 10, (0, 255, 0), cv2.FILLED)
 
-        # Draw a line through the center point (cx, cy)
-        #cv2.line(img, (width // 2, height // 2), (cx ), (0, 0, 255), 2)
-        
-        # Display cx, cy values below the center point
-        text = f"cx: {cx}"
-        #cv2.putText(img, text, (cx - 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-
-    return cx
-
+    return cx,cy, angle
 
 def getSensorOutput(imgThres, sensors):
 
@@ -95,60 +119,58 @@ def getSensorOutput(imgThres, sensors):
 
     return senOut
 
-def sendCommands(senOut, cx):
+def sendCommands(senOut, cx, pd_controller,pd_controllerangle):
     global curve, prevError
-    error = int((cx) - (width // 2))  # Sai số 
-    Kp = 0.1  # Hệ số tỷ lệ P
-    Kd = 0.02  # Hệ số tỷ lệ đạo hàm D
-    lr = int(-(Kp * error + Kd * (error - prevError)))
+    # error = int(cx - 240)  # Sai số
+    lr = pd_controller.update(cx)
     lr = -lr
     lr = int(np.clip(lr, -10, 10))
-
+    
+    ang = pd_controllerangle.update(angle)
+    ang = int(np.clip(ang, -10, 10))
 
     ## Rotation
+    if senOut ==   [1, 0, 0]: curve = ang
+    elif senOut == [1, 1, 0]: curve = ang
+    elif senOut == [0, 1, 0]: curve = 0
+    elif senOut == [0, 1, 1]: curve = -ang
+    elif senOut == [0, 0, 1]: curve = -ang
+    elif senOut == [0, 0, 0]: curve = 0
+    elif senOut == [1, 1, 1]: curve = 0
+    elif senOut == [1, 0, 1]: curve = 0
 
-    if   senOut == [1, 0, 0]: curve = weights[0]
-
-    elif senOut == [1, 1, 0]: curve = weights[1]
-
-    elif senOut == [0, 1, 0]: curve = weights[2]
-
-    elif senOut == [0, 1, 1]: curve = weights[3]
-
-    elif senOut == [0, 0, 1]: curve = weights[4]
-
-    elif senOut == [0, 0, 0]: curve = weights[2]
-
-    elif senOut == [1, 1, 1]: curve = weights[2]
-
-    elif senOut == [1, 0, 1]: curve = weights[2]
-    
-    print('left-right:', lr)
+    # print('angel:', ang)
+    # print('error:', error)
     me.send_rc_control(lr, fSpeed, 0, curve)
-    prevError = error
+    
+    # prevError = error
+    
+    data.append({'Time': time, 'SP': 240, 'PV': cx})
 
-prevError = 0
+# Khởi tạo DataFrame
+data = []
+
+# Thêm cột thời gian
+time = 0
+
+# Khởi tạo PD controller
+pd_controller = PDController(kp=0.2, kd=0.14, setpoint=240)
+pd_controllerangle = PDControllerangle(kp_a=0.132, kd_a=0.15, setpoint_a= 0)
 
 while True:
-
-    #_, img = cap.read()
-
     img = me.get_frame_read().frame
-
     img = cv2.resize(img, (width, height))
-
     img = cv2.flip(img, 0)
-
     imgThres = thresholding(img)
-
-    cx = getContours(imgThres, img)  ## For Translation
-
-    senOut = getSensorOutput(imgThres, sensors)  ## Rotation
-
-    sendCommands(senOut, cx)
-
+    cx,cy,angle = getContours(imgThres, img)  # For Translation
+    senOut = getSensorOutput(imgThres, sensors)  # Rotation
+    sendCommands(senOut, cx, pd_controller,pd_controllerangle)
     cv2.imshow("Output", img)
-
     cv2.imshow("Path", imgThres)
-
     cv2.waitKey(1)
+    time += 1
+
+    # Ghi dữ liệu vào file Excel 0.05s
+    if time % 30== 0:
+        df = pd.DataFrame(data)
+        df.to_excel('final_4.xlsx', index=False)
