@@ -5,6 +5,7 @@ focuses on researching and developing a UAV system capable of autonomously contr
 Here is a [short video](https://www.youtube.com/watch?v=CcdG9qiCEZA) of the drone in action:
 
 <img src="/images/drone_front.jpeg" alt="tello flowing line" width="600" height="274" border="10" />
+
 ## 2 Option:
 ### Using Raspberry Pi Zero and camera module 
 #### Prerequisites
