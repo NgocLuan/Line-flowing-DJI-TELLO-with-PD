@@ -14,7 +14,7 @@ Here is a video of the drone in action (click the image -->):[![Watch the video]
 - [WiFi Dongle](https://www.raspberrypi.org/products/raspberry-pi-usb-wifi-dongle/)
 - Micro USB to USB Type A female adapter [something like this](https://www.amazon.com/CableCreation-Adapter-Compatible-Samsung-Function/dp/B01LXBS8EJ/)
 - 5V Step-Up Power Module Lithium Battery Charging Protection Board
- <br/>![5V Step-Up Power Module Lithium Battery Charging Protection Board](/images/powerbankmodule.jpeg)
+ <br/>![5V Step-Up Power Module Lithium Battery Charging Protection Board](/images/powerbankmodule.jpg)
 - 3.7V 1200mah LiPo battery (Try getting the size: 30mm x 63mm x 4.75mm so it fits nicely over the drone)
 - Male micro usb cable head. You can use any old micro usb cable and cut micro usb head along with a small length of wire.
 <br/>![shell](/images/microusbshell.jpeg)
