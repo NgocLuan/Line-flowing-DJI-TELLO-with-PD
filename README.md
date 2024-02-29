@@ -7,7 +7,7 @@ Here is a [short video](https://www.youtube.com/watch?v=CcdG9qiCEZA) of the dron
 <img src="/images/drone_front.jpeg" alt="tello flowing line" width="600" height="274" border="10" />
 
 ## 2 Option:
-### Using Raspberry Pi Zero and camera module ([Control DJI Tello using Raspberry Pi Zero](https://github.com/erviveksoni/raspberrypi-controlled-tello?tab=readme-ov-file))
+### Using Raspberry Pi Zero and camera module (erviveksoni:[Control DJI Tello using Raspberry Pi Zero](https://github.com/erviveksoni/raspberrypi-controlled-tello?tab=readme-ov-file))
 #### Prerequisites
 - Raspberry Pi Zero W
 - Raspberry Pi Camera V2
