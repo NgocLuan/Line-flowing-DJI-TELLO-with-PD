@@ -4,17 +4,69 @@ focuses on researching and developing a UAV system capable of autonomously contr
 
 Here is a [short video](https://www.youtube.com/watch?v=CcdG9qiCEZA) of the drone in action:
 
-<img src="/images/drone_front.jpeg" alt="Tello with Raspberry Pi Zero" width="600" height="274" border="10" />
+<img src="/images/drone_front.jpeg" alt="tello flowing line" width="600" height="274" border="10" />
+## 2 Option:
+### Using Raspberry Pi Zero and camera module 
+#### Prerequisites
+- Raspberry Pi Zero W
+- Raspberry Pi Camera V2
+- wifi adapter
+- [DJI Tello](https://store.dji.com/product/tello). Ensure your Tello is setup and you are able to fly with your phone app.
+- [WiFi Dongle](https://www.raspberrypi.org/products/raspberry-pi-usb-wifi-dongle/)
+- Micro USB to USB Type A female adapter [something like this](https://www.amazon.com/CableCreation-Adapter-Compatible-Samsung-Function/dp/B01LXBS8EJ/)
+- 5V Step-Up Power Module Lithium Battery Charging Protection Board
+ <br/>![5V Step-Up Power Module Lithium Battery Charging Protection Board](/images/powerbankmodule.jpeg)
+- 3.7V 1200mah LiPo battery (Try getting the size: 30mm x 63mm x 4.75mm so it fits nicely over the drone)
+- Male micro usb cable head. You can use any old micro usb cable and cut micro usb head along with a small length of wire.
+<br/>![shell](/images/microusbshell.jpeg)
+- Wires
+- Solderign gun
+#### Hardware
+##### Creating the LiPo Battery Module
+We wont be using the USB output from the Tello to power our Raspberry Pi Zero for obvious reason :-). Lets create our own power source to power the Raspberry Pi Zero as well as a permanent setup to charge it.
+ - Remove the USB Type A shell from the module carefully (You may need to use a plair). Ensure the +ve and -ve output points are visible on the chip.
+ - Solder the micro usb wires -> black to the -ve and red to +ve output points.
+ - Follow this [youtube link](https://www.youtube.com/watch?v=KB8S83aY35w) to solder the LiPo connector to the charging module. 
+ - Check whether the inout and output are working from the above setup.
 
-But nothing stops you from flying Tello without the Raspberry mounted atop. The steps mentioned here will still be valid. Just place the Raspberry Pi on the ground.
+##### Mounting Raspberry Pi Zero on Tello Mount
+ - Assemble the 3D printed Raspberry Pi Zero Tello mount.
+ - Optional: Connect the Raspberry Pi Zero Camera module to Raspberry Pi Zero
+ - Mount the Raspberry Pi Zero on the 3D printed assembled mount. You can a combination of screw which fits into the mount and rubber bands (check the images).
+ - Also connect the LiPo batter module and the Micro USB to USB Type A female adapter + Wifi dongle to the Raspberry Pi Zero.
+<div height="200px">
+<span><img src="images/assembled_zero_mount.jpeg" width="300" height="137"/></span>
+<span><img src="images/assembled_zero_mount_2.jpeg" width="300" height="137"/></span>
+</div>
 
-To make this project you will need both hardware and software skills some of which I also learned during the process but that's the point... you gotta start somewhere!
+##### Mounting the 3D Mount on Tello
+ - Detach the canopy from Tello
+ - Snap the 3D Printed case on top of the Tello 
+#### Software
 
-Few more images of the setup.
+##### Setting up Raspberry Pi Operating System
+We will setup Raspberry Pi in headless mode to get the optimal usage of RAM and CPU. There are many good posts on how to setup Raspbian Buster Lite on the Raspberry Pi Zero in [Headless Mode](https://desertbot.io/blog/setup-pi-zero-w-headless-wifi/) 
 
-<img src="/images/Tello.jpg" alt="Tello with Raspberry Pi Zero" width="400" height="364" border="10" />
+At this point in time, we should be able to SSH into out Pi using the Wifi onboard. Also the Pi will be most likey have access to the internet (dependeing on your WIFI network settings).
 
+##### Connecting Raspberry Pi Zero to Tello
+> __Note__: The steps in the section below are completely optional for this project. You can directly configure Raspberry Pi Zero to connect to Tello's WIFI network.
+>The steps for doing this will be similar to the once you followed during setting up the Raspberry Pi.
+>Though needless to say, your laptop should be connected to Tello's network to be able to run this application.
 
+When you turn on Tello, it configures itself as an AP allowing the clients to connect and control to it. Once a client is connected to Tello, it looses internet connectivity. 
+I wanted to avoid this blocker for a few project ideas I had in mind hence I configured the Raspberry Pi with dual WIFI interfaces. 
+
+The Raspberry Pi Zero's onboard WIFI connects to my home network and the WIFI Adapter connects to Tello's WIFI.
+
+- Ensure the WIFI dongle is connected to the Raspberry Pi Zero micro usb port
+- Power on Raspberry Pi
+- SSH into Raspberry Pi Zero
+- Type `lsusb`. Ensure you see the WIFI USB adapter listed on the console output
+- Type `sudo nano /etc/network/interfaces` to edit the network interfaces file
+- Add the text below towards the end of the file. 
+Replace the `TELLO_NETWORK_NAME` with the WIFI AP name of Tello followed by its password.
+### Using  
 ## Prerequisites
 - Raspberry Pi Zero W
 - [Xbox One controller](https://www.microsoft.com/en-us/p/xbox-wireless-controller/8t2d538wc7mn?cid=msft_web_collection&activetab=pivot%3aoverviewtab) Generation 2 or later which has bluetooth support
@@ -34,7 +86,6 @@ Few more images of the setup.
 - Optional for this project: Raspberry Pi Camera V2
 
 ## Hardware
-
 ### Creating the LiPo Battery Module
 We wont be using the USB output from the Tello to power our Raspberry Pi Zero for obvious reason :-). Lets create our own power source to power the Raspberry Pi Zero as well as a permanent setup to charge it.
  - Remove the USB Type A shell from the module carefully (You may need to use a plair). Ensure the +ve and -ve output points are visible on the chip.
