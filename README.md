@@ -2,8 +2,7 @@
 
 focuses on researching and developing a UAV system capable of autonomously controlling and maintaining flight along a pre-defined path (line), while utilizing image processing techniques to detect and analyze data of the line path. The project emphasizes analyzing, designing, and implementing image processing algorithms and suitable PD controllers to achieve this goal. Specific tasks include line detection for the drone to follow, collecting necessary data for autonomous line-following, and constructing PD controllers integrated with the image processing system. The expected outcome of the project is a flexible and efficient UAV system capable of accurately and stably flying along a predetermined line path
 
-Here is a [short video](https://www.youtube.com/watch?v=CcdG9qiCEZA) of the drone in action:
-[![Watch the video](https://i9.ytimg.com/vi_webp/CcdG9qiCEZA/mqdefault.webp?v=65e0532c&sqp=CMytga8G&rs=AOn4CLDMixzo2KN4rKkgoPCRR0go1LrNRw)](https://youtu.be/CcdG9qiCEZA)
+Here is a [short video]of the drone in action:[![Watch the video](https://i9.ytimg.com/vi_webp/CcdG9qiCEZA/mqdefault.webp?v=65e0532c&sqp=CMytga8G&rs=AOn4CLDMixzo2KN4rKkgoPCRR0go1LrNRw)](https://youtu.be/CcdG9qiCEZA)
 <img src="/images/drone_front.jpeg" alt="tello flowing line" width="600" height="274" border="10" />
 
 ## 2 Option:
