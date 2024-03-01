@@ -75,4 +75,57 @@ Attach a reflective mirror to the front of the drone's camera and adjust it to a
 <span><img src="images/45.jpg" width="300" height="137"/></span>
 </div>
 
-## 
+## PD Controler for oy axis
+### Set speed
+The input image from the Tello drone's camera after preprocessing with OpenCV2 will have dimensions of 480x360 (width x height). To make the drone follow the center of the line, we need to track the center point of the drone on the camera and the detected line. Therefore, the resulting center point will range between 0 and 480 pixels.
+
+For the drone to follow the center of the line, the drone's center point and the line's center point must coincide and be equal to half of the maximum width, which is 480/2 or 240 pixels.
+
+To find a starting value for Kp, we calculate the maximum possible error and determine the conversion factor between this maximum error value and the speed we set for the drone initially. If the drone slips away from the line and moves towards the right of the line, the farthest point between the line and the drone will return 0 pixels. Our target is set at 240 pixels, so the maximum error on the right side is 240 - 0, which equals 240 pixels. Similarly, if the drone slips away from the line and moves towards the left, the farthest point between the line and the drone will return 480 pixels. Subtracting our target value from this yields 240 - 480, or -240 pixels (ignoring the negative sign). In both cases, the maximum error is 240 pixels (disregarding the sign).
+
+If we set the maximum speed for the drone to be 10%, then we need to find a proportionality factor to convert from 240 pixels to 10 when the drone is at the farthest position from the line's center. When the camera begins to detect the line on the right or left side, the drone should start adjusting with the following formula: Kp * error = 10. From this, we derive the specific formula to find the proportionality factor:
+
+Kp * Max error = Max Speed
+
+Where:
+Kp: Proportionality factor
+Max error: Maximum error
+Max Speed: Maximum speed of the drone
+Thus, we have Kp = Max Speed / Max error, so Kp = 10 / 240 = 0.0416.
+### Kp = 0,0416
+Result:
+<div height="200px">
+<span><img src="images/0,0416.jpg" width="300" height="137"/></span>
+</div>
+
+### Kp = 0,0832
+Result:
+<div height="200px">
+<span><img src="images/0,0832.jpg" width="300" height="137"/></span>
+</div>
+
+### Kp = 0,12
+Result:
+<div height="200px">
+<span><img src="images/0,12.jpg" width="300" height="137"/></span>
+</div>
+
+### Kd
+The Ziegler-Nichols method suggests determining an appropriate value for Kd using the formula:
+
+\[Kd = Kp \times \frac{T}{8}\]
+
+Where:
+- \(Kp\) is the proportional gain,
+- \(T\) is the oscillation period when the system is stable.
+
+From the experimental result with \(Kp' = 0.124\), we obtain an oscillation period \(T = 15.1\) seconds with a sampling time of \(0.05\) seconds.
+
+Applying the formula with \(Kp = 0.0744\) and \(T = 15.1\), we can find the derivative gain \(Kd\) for the PD controller for the y-axis:
+
+\[Kd = 0.0744 \times \frac{15.1}{8}\]
+
+\[Kd \approx 0.1398\]
+
+So, the appropriate value of \(Kd\) for the PD controller for the y-axis is approximately \(0.1398\).
+
