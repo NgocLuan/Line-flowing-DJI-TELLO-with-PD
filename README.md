@@ -65,11 +65,14 @@ The Raspberry Pi Zero's onboard WIFI connects to my home network and the WIFI Ad
 - Type `sudo nano /etc/network/interfaces` to edit the network interfaces file
 - Add the text below towards the end of the file. 
 Replace the `TELLO_NETWORK_NAME` with the WIFI AP name of Tello followed by its password.
-### Using  
+### Using reflective mirrors
+#### Prerequisites
+- [DJI Tello](https://store.dji.com/product/tello). Ensure your Tello is setup and you are able to fly with your phone app.
+- Mirror (20x20 mm)
+##### Mounting the mirors Mount on Tello
+Attach a reflective mirror to the front of the drone's camera and adjust it to a 45-degree angle relative to the ground.
+<div height="200px">
+<span><img src="images/45.jpg" width="300" height="137"/></span>
+</div>
 
-
-## Run Application
-- Ensure you are connected to Tello and the Xbox Controller 
-- `cd raspberrypi-controlled-tello`
-- Run `Python3 flytello.py`
-- Control the Tello using the Joysticks
+## 
