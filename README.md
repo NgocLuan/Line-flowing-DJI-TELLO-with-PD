@@ -93,19 +93,19 @@ Max error: Maximum error
 Max Speed: Maximum speed of the drone
 Thus, we have Kp = Max Speed / Max error, so Kp = 10 / 240 = 0.0416.
 ### Kp = 0,0416 (Click the image for video)
-Result: [Kp = 0,0416](https://www.youtube.com/watch?v=DMcX5RvyEMo)
+Result: [Kp = 0,0416](https://www.youtube.com/watch?v=DMcX5RvyEMo) (Video)
 <div height="200px">
 <span><img src="images/Kp = 0,0416.jpg" width="300" height="137"/></span>
 </div>
 
 ### Kp = 0,0832 
-Result: [Kp = 0,0832](https://www.youtube.com/watch?v=r6ehLc6K7bI)
+Result: [Kp = 0,0832](https://www.youtube.com/watch?v=r6ehLc6K7bI) (Video)
 <div height="200px">
 <span><img src="images/Kp = 0,0832.jpg" width="300" height="137"/></span>
 </div>
 
 ### Kp = 0,12
-Result:[Kp = 0,12](https://www.youtube.com/watch?v=N4tQ0srS11k)
+Result:[Kp = 0,12](https://www.youtube.com/watch?v=N4tQ0srS11k) (Video)
 <div height="200px">
 <span><img src="images/Kp = 0,12.jpg" width="300" height="137"/></span>
 </div>
