@@ -129,3 +129,4 @@ Applying the formula with \(Kp = 0.0744\) and \(T = 15.1\), we can find the deri
 
 So, the appropriate value of \(Kd\) for the PD controller for the y-axis is approximately \(0.1398\).
 
+## PD Controler for rotale in oz axis
