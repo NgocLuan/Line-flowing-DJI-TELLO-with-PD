@@ -92,19 +92,19 @@ Kp: Proportionality factor
 Max error: Maximum error
 Max Speed: Maximum speed of the drone
 Thus, we have Kp = Max Speed / Max error, so Kp = 10 / 240 = 0.0416.
-### Kp = 0,0416
-Result: [![Watch the video](https://i.ytimg.com/an_webp/CcdG9qiCEZA/mqdefault_6s.webp?du=3000&sqp=CIDrh68G&rs=AOn4CLDkerNpyRicNilL_cHMSCf8Q6Ojxw)](https://youtu.be/CcdG9qiCEZA)
+### Kp = 0,0416 (Click the image for video)
+Result:
 <div height="200px">
-<span><img src="images/Kp = 0,0416.jpg" width="300" height="137"/></span>
+<span><img src="images/Kp = 0,0416.jpg" (https://youtu.be/CcdG9qiCEZA) width="300" height="137"/></span>
 </div>
 
-### Kp = 0,0832 [![Watch the video](https://i.ytimg.com/an_webp/CcdG9qiCEZA/mqdefault_6s.webp?du=3000&sqp=CIDrh68G&rs=AOn4CLDkerNpyRicNilL_cHMSCf8Q6Ojxw)](https://youtu.be/CcdG9qiCEZA)
+### Kp = 0,0832 
 Result:
 <div height="200px">
 <span><img src="images/Kp = 0,0832.jpg" width="300" height="137"/></span>
 </div>
 
-### Kp = 0,12 [![Watch the video](https://i.ytimg.com/an_webp/CcdG9qiCEZA/mqdefault_6s.webp?du=3000&sqp=CIDrh68G&rs=AOn4CLDkerNpyRicNilL_cHMSCf8Q6Ojxw)](https://youtu.be/CcdG9qiCEZA)
+### Kp = 0,12
 Result:
 <div height="200px">
 <span><img src="images/Kp = 0,12.jpg" width="300" height="137"/></span>
