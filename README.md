@@ -2,7 +2,7 @@
 
    focuses on researching and developing a UAV system capable of autonomously controlling and maintaining flight along a pre-defined path (line), while utilizing image processing techniques to detect and analyze data of the line path. The project emphasizes analyzing, designing, and implementing image processing algorithms and suitable PD controllers to achieve this goal. Specific tasks include line detection for the drone to follow, collecting necessary data for autonomous line-following, and constructing PD controllers integrated with the image processing system. The expected outcome of the project is a flexible and efficient UAV system capable of accurately and stably flying along a predetermined line path
 
-Here is a video of the drone in action (click the image -->):[![Watch the video](https://i.ytimg.com/an_webp/CcdG9qiCEZA/mqdefault_6s.webp?du=3000&sqp=CIDrh68G&rs=AOn4CLDkerNpyRicNilL_cHMSCf8Q6Ojxw)](https://youtu.be/CcdG9qiCEZA)
+Here is a video of the drone in action (click the image -->):[![Watch the video](/images/thumbnail.jpg)](https://youtu.be/CcdG9qiCEZA)
 
 ## 2 Option:
 ### Using Raspberry Pi Zero and camera module (erviveksoni:[Control DJI Tello using Raspberry Pi Zero](https://github.com/erviveksoni/raspberrypi-controlled-tello?tab=readme-ov-file))
