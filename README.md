@@ -5,7 +5,7 @@
 Here is a video of the drone in action (click the image -->):[![Watch the video](/images/thumbnail.jpg)](https://youtu.be/CcdG9qiCEZA)
 
 ## 2 Option:
-### (OPTION 1)Using Raspberry Pi Zero and camera module (erviveksoni:[Control DJI Tello using Raspberry Pi Zero](https://github.com/erviveksoni/raspberrypi-controlled-tello?tab=readme-ov-file))
+### (OPTION 1) Using Raspberry Pi Zero and camera module (erviveksoni:[Control DJI Tello using Raspberry Pi Zero](https://github.com/erviveksoni/raspberrypi-controlled-tello?tab=readme-ov-file))
 #### Prerequisites
 - Raspberry Pi Zero W
 - Raspberry Pi Camera V2
@@ -65,7 +65,7 @@ The Raspberry Pi Zero's onboard WIFI connects to my home network and the WIFI Ad
 - Type `sudo nano /etc/network/interfaces` to edit the network interfaces file
 - Add the text below towards the end of the file. 
 Replace the `TELLO_NETWORK_NAME` with the WIFI AP name of Tello followed by its password.
-### (OPTION 2)Using reflective mirrors
+### (OPTION 2) Using reflective mirrors
 #### Prerequisites
 - [DJI Tello](https://store.dji.com/product/tello). Ensure your Tello is setup and you are able to fly with your phone app.
 - Mirror (20x20 mm)
