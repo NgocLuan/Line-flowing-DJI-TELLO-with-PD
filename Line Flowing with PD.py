@@ -155,7 +155,7 @@ time = 0
 
 # Khởi tạo PD controller
 pd_controller = PDController(kp=0.0744, kd=0.14, setpoint=240)
-pd_controllerangle = PDControllerangle(kp_a=0.111, kd_a=0.15, setpoint_a= 0)
+pd_controllerangle = PDControllerangle(kp_a=0.0666, kd_a=0.15, setpoint_a= 0)
 
 while True:
     img = me.get_frame_read().frame
