@@ -92,7 +92,7 @@ Kp: Proportionality factor
 Max error: Maximum error
 Max Speed: Maximum speed of the drone
 Thus, we have Kp = Max Speed / Max error, so Kp = 10 / 240 = 0.0416.
-### Kp = 0,0416 (Click the image for video)
+### Kp = 0,0416 
 Result: [Kp = 0,0416](https://www.youtube.com/watch?v=DMcX5RvyEMo) (Video)
 <div height="200px">
 <span><img src="images/Kp = 0,0416.jpg" width="300" height="137"/></span>
